@@ -1,0 +1,8 @@
+C:\Users\dnova\source\repos\WebApplication3\HateoasLibrary\bin\Debug\netcoreapp3.1\HateoasLibrary.deps.json
+C:\Users\dnova\source\repos\WebApplication3\HateoasLibrary\bin\Debug\netcoreapp3.1\HateoasLibrary.dll
+C:\Users\dnova\source\repos\WebApplication3\HateoasLibrary\bin\Debug\netcoreapp3.1\HateoasLibrary.pdb
+C:\Users\dnova\source\repos\WebApplication3\HateoasLibrary\obj\Debug\netcoreapp3.1\HateoasLibrary.AssemblyInfoInputs.cache
+C:\Users\dnova\source\repos\WebApplication3\HateoasLibrary\obj\Debug\netcoreapp3.1\HateoasLibrary.AssemblyInfo.cs
+C:\Users\dnova\source\repos\WebApplication3\HateoasLibrary\obj\Debug\netcoreapp3.1\HateoasLibrary.csproj.CoreCompileInputs.cache
+C:\Users\dnova\source\repos\WebApplication3\HateoasLibrary\obj\Debug\netcoreapp3.1\HateoasLibrary.dll
+C:\Users\dnova\source\repos\WebApplication3\HateoasLibrary\obj\Debug\netcoreapp3.1\HateoasLibrary.pdb
