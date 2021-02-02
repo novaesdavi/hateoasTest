@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text;
+using static HateoasLibrary.Repository.InMemoryConditionRepository;
 
 namespace HateoasLibrary.Repository
 {
@@ -39,6 +40,7 @@ namespace HateoasLibrary.Repository
 				this.Name = name;
 			}
 
+			public Condition Condition { get; set; }
 			public Type TypeResponse { get; }
 			public Type TypeRequest { get; }
 			public Expression Expression { get; }

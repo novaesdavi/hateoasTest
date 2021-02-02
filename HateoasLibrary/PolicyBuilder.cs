@@ -8,15 +8,15 @@ using Microsoft.AspNetCore.Http;
 namespace HateoasLibrary
 {
     public sealed class PolicyBuilder<TResponse>
-        where TResponse : class
+        where TResponse : class, new()
     {
 
-        public PolicyBuilder<TResponse> AddExternalUri(string linkKey, string method, Expression<Func<TResponse, object>> expression)
+        public PolicyBuilder<TResponse> AddExternalUri(string linkKey, string method, Expression<Func<TResponse, object>> expression, Func<ConditionModel<TResponse>, bool> expressionCondition = null)
         {
             InMemoryPolicyRepository.InMemoryPolicies.Add(
                 new InMemoryPolicyRepository.ExternalPolicy(typeof(TResponse), expression, linkKey)
                 {
-
+                    Condition = expressionCondition != null ? new InMemoryConditionRepository.Condition(e => expressionCondition(e.Cast<TResponse>()), linkKey) : null,
                     Method = method ?? HttpMethods.Get
                 });
 
@@ -26,7 +26,7 @@ namespace HateoasLibrary
     }
 
     public sealed class PolicyBuilder<TResponse, TRequest>
-        where TResponse : class 
+        where TResponse : class
         where TRequest : class
     {
 
@@ -50,9 +50,7 @@ namespace HateoasLibrary
 
         public ConditionBuilder<TResponse> IncludeCondition(Func<ConditionModel<TResponse>, bool> expressionCondition)
         {
-            var model = new ConditionModel<TResponse>();
-
-            InMemoryConditionRepository.InMemoryCondition = new InMemoryConditionRepository.Condition(expression => expressionCondition(expression.Cast<TResponse>()));
+            InMemoryConditionRepository.InMemoryCondition.Add(new InMemoryConditionRepository.Condition(expression => expressionCondition(expression.Cast<TResponse>()), typeof(TResponse).FullName));
 
             return this;
         }

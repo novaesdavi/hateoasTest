@@ -9,8 +9,7 @@ namespace HateoasLibrary.Repository
 {
     public sealed class InMemoryConditionRepository
     {
-        public static Condition InMemoryCondition { get; set; }
-
+        public static ConcurrentBag<Condition> InMemoryCondition { get; } = new ConcurrentBag<Condition>();
         public class Condition
         {
 

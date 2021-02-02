@@ -24,7 +24,7 @@ namespace HateoasLibrary
 		}
 
 		public LinkBuilder AddPolicy<T>(Action<PolicyBuilder<T>> modelSetup)
-	where T : class
+	where T : class, new()
 		{
 			var policy = new PolicyBuilder<T>();
 
