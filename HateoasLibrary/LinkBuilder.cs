@@ -5,46 +5,43 @@ using System.Text;
 
 namespace HateoasLibrary
 {
-	/// <summary>
-	/// Allows link policy configuration.
-	/// </summary>
-	public sealed class LinkBuilder
-	{
-		/// <inheritdoc/>
-		public LinkBuilder AddPolicy<T>(Action<PolicyBuilder<T>> modelSetup, Action<ConditionBuilder<T>> conditionSetup)
-			where T : class, new ()
-		{
-			var policy = new PolicyBuilder<T>();
-			var condition = new ConditionBuilder<T>();
+    /// <summary>
+    /// Allows link policy configuration.
+    /// </summary>
+    public sealed class LinkBuilder
+    {
+        /// <inheritdoc/>
+        public LinkBuilder AddPolicy<TResponse>(Action<PolicyBuilder<TResponse>> modelSetup, Action<ConditionBuilder<TResponse>> conditionSetup)
+            where TResponse : class, new()
+        {
+            var policy = new PolicyBuilder<TResponse>();
+            var condition = new ConditionBuilder<TResponse>();
 
-			modelSetup?.Invoke(policy);
-			conditionSetup?.Invoke(condition);
+            modelSetup?.Invoke(policy);
+            conditionSetup?.Invoke(condition);
 
-			return this;
-		}
+            return this;
+        }
 
-		public LinkBuilder AddPolicy<T>(Action<PolicyBuilder<T>> modelSetup)
-	where T : class, new()
-		{
-			var policy = new PolicyBuilder<T>();
+        public LinkBuilder AddPolicy<TResponse>(Action<PolicyBuilder<TResponse>> modelSetup)
+    where TResponse : class, new()
+        {
+            var policy = new PolicyBuilder<TResponse>();
 
-			modelSetup?.Invoke(policy);
+            modelSetup?.Invoke(policy);
 
-			return this;
-		}
+            return this;
+        }
 
-		//public LinkBuilder AddPolicy<TResponse,TRequest>(Action<PolicyBuilder<TResponse, TRequest>> modelSetup, Action<ConditionBuilder<TResponse>> condition)
-		//	where TResponse : class
-		//where TRequest : class
-		//{
-		//	var policy = new PolicyBuilder<TResponse, TRequest>();
-		//	var policy = new ConditionBuilder<TResponse>();
+        public LinkBuilder AddPolicy<TResponse, TRequest>(Action<PolicyBuilder<TResponse, TRequest>> modelSetup)
+            where TResponse : class, new()
+            where TRequest : class
+        {
+            var policy = new PolicyBuilder<TResponse, TRequest>();
 
-		//	modelSetup?.Invoke(policy);
+            modelSetup?.Invoke(policy);
 
-		//	condition?.Invoke()
-
-		//	return this;
-		//}
-	}
+            return this;
+        }
+    }
 }

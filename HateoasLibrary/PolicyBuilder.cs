@@ -26,17 +26,16 @@ namespace HateoasLibrary
     }
 
     public sealed class PolicyBuilder<TResponse, TRequest>
-        where TResponse : class
+        where TResponse : class, new()
         where TRequest : class
     {
 
-        public PolicyBuilder<TResponse, TRequest> AddExternalUri(string linkKey, string method, Expression<Func<TResponse, object>> expression)
+        public PolicyBuilder<TResponse, TRequest> AddExternalUri(string linkKey, string method, Expression<Func<TResponse, TRequest, object>> expression, Func<ConditionModel<TResponse>, bool> expressionCondition = null)
         {
-
             InMemoryPolicyRepository.InMemoryPolicies.Add(
                 new InMemoryPolicyRepository.ExternalPolicy(typeof(TResponse), typeof(TRequest), expression, linkKey)
                 {
-
+                    Condition = expressionCondition != null ? new InMemoryConditionRepository.Condition(e => expressionCondition(e.Cast<TResponse>()), linkKey) : null,
                     Method = method ?? HttpMethods.Get
                 });
 
@@ -47,7 +46,6 @@ namespace HateoasLibrary
     public sealed class ConditionBuilder<TResponse>
     where TResponse : class, new()
     {
-
         public ConditionBuilder<TResponse> IncludeCondition(Func<ConditionModel<TResponse>, bool> expressionCondition)
         {
             InMemoryConditionRepository.InMemoryCondition.Add(new InMemoryConditionRepository.Condition(expression => expressionCondition(expression.Cast<TResponse>()), typeof(TResponse).FullName));

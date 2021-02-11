@@ -1,6 +1,7 @@
 ﻿using HateoasLibrary.Extensions;
 using HateoasLibrary.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,45 +21,66 @@ namespace HateoasLibrary.Providers
         public HateoasResultProvider(IServiceProvider serviceProvider)
             => _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
 
-        public bool HasAnyPolicy(IActionResult actionResult, out ObjectResult objectResult)
+        public bool HasAnyPolicy(IActionResult actionResult, IList<ParameterDescriptor> parametersRequest, out ObjectResult objectResult)
         {
-            if (actionResult is ObjectResult result)
-            {
-                objectResult = actionResult as ObjectResult;
-                string resultType = objectResult.Value.GetType().FullName;
+            //if (actionResult is ObjectResult result)
+            //{
+            //    objectResult = actionResult as ObjectResult;
+            //    string resultType = objectResult.Value.GetType().FullName;
 
-                if (HasAnyValidCondition(objectResult))
-                {
+            //    if (HasAnyValidCondition(objectResult))
+            //    {
 
-                    if (result.Value is IEnumerable<object> collection)
-                    {
-                        resultType = collection
-                            .Select(v => v.GetType().FullName)
-                            .Distinct()
-                            .Single();
-                    }
+            //        if (result.Value is IEnumerable<object> collection)
+            //        {
+            //            resultType = collection
+            //                .Select(v => v.GetType().FullName)
+            //                .Distinct()
+            //                .Single();
+            //        }
 
-                    return InMemoryPolicyRepository.InMemoryPolicies
-                        .Any(p => p.TypeResponse.FullName.Equals(resultType));
-                }
+            //        return InMemoryPolicyRepository.InMemoryPolicies
+            //            .Where(p => p.TypeResponse.FullName.Equals(resultType) 
+            //            && (parametersRequest.Any( req => req.ParameterType.FullName == p.TypeRequest?.FullName) ||
+            //            p.TypeRequest == null
+            //            )).Any();
 
-            }
+            //    }
+
+            //}
             objectResult = default;
             return false;
         }
 
-        private bool HasAnyValidCondition(ObjectResult objectResult)
+        public bool HasAnyValidCondition(IActionResult actionResult, out ObjectResult objectResult)
         {
-            var condition = InMemoryConditionRepository.InMemoryCondition.Where(p => p.Name.Equals(objectResult.Value.GetType().FullName)).Single();
-
-            if (condition != null)
+            if (actionResult is ObjectResult result)
             {
-                ConditionModelResponse response = new ConditionModelResponse();
-                response.Response = objectResult.Value;
-                return condition.Expression.Invoke(response);
+                objectResult = actionResult as ObjectResult;
+                var objectResultQuery = actionResult as ObjectResult
+                    ;
+                string resultType = objectResult.Value.GetType().FullName;
+
+                var condition = InMemoryConditionRepository.InMemoryCondition.Where(p => p.Name.Equals(objectResultQuery.Value.GetType().FullName)).Single();
+
+                if (condition != null)
+                {
+                    ConditionModelResponse response = new ConditionModelResponse();
+                    response.Response = objectResult.Value;
+                    return condition.Expression.Invoke(response);
+                }
+
+                return true;
+            }
+            else
+            {
+                objectResult = default;
+                return false;
             }
 
-            return true;
+            
+
+
         }
 
         private bool IsValidCondition(Condition condition, ObjectResult objectResult)
@@ -73,9 +95,9 @@ namespace HateoasLibrary.Providers
             return true;
         }
 
-        public async Task<IActionResult> GetContentResultAsync(ObjectResult result)
+        public async Task<IActionResult> GetContentResultAsync(ObjectResult result, IList<ParameterDescriptor> parametersRequest)
         {
-            var policies = GetFilteredPolicies(result);
+            var policies = GetFilteredPolicies(result, parametersRequest);
             if (!policies.Any())
             {
                 return null;
@@ -91,7 +113,7 @@ namespace HateoasLibrary.Providers
                 {
                     if (IsValidCondition(policy.Condition, result))
                     {
-                        var lambdaResult = GetLambdaResult(policy.Expression, item);
+                        var lambdaResult = GetLambdaResult(policy.Expression, item, policy.TypeRequest);
                         var link = await GetPolicyLinkAsync(policy, lambdaResult).ConfigureAwait(false);
                         links.Add(link);
                     }
@@ -149,7 +171,7 @@ namespace HateoasLibrary.Providers
             return await Task.FromResult(link).ConfigureAwait(false);
         }
 
-        private object GetLambdaResult(Expression expression, object sourcePayload)
+        private object GetLambdaResult(Expression expression, object sourcePayload, object sourceRequest)
         {
             var lambdaExpression = (expression as LambdaExpression);
 
@@ -159,7 +181,10 @@ namespace HateoasLibrary.Providers
             var body = lambdaExpression.Body;
             var parameter = lambdaExpression.Parameters[0];
 
-            return Expression.Lambda(body, parameter).Compile().DynamicInvoke(sourcePayload);
+            if (sourceRequest == null)
+                return Expression.Lambda(body, parameter).Compile().DynamicInvoke(sourcePayload);
+            else
+                return Expression.Lambda(body, parameter).Compile().DynamicInvoke(sourcePayload, sourceRequest);
         }
 
         private bool GetConditionResult(Func<Type, bool> condition, object sourcePayload)
@@ -170,7 +195,7 @@ namespace HateoasLibrary.Providers
         }
 
 
-        private IEnumerable<InMemoryPolicyRepository.Policy> GetFilteredPolicies(ObjectResult result)
+        private IEnumerable<InMemoryPolicyRepository.Policy> GetFilteredPolicies(ObjectResult result, IList<ParameterDescriptor> parametersRequest)
         {
             string resultType = result.Value.GetType().FullName;
 
@@ -183,8 +208,10 @@ namespace HateoasLibrary.Providers
             }
 
             return InMemoryPolicyRepository.InMemoryPolicies
-                .Where(p => p.TypeResponse.FullName.Equals(resultType))
-                .AsEnumerable();
+                        .Where(p => p.TypeResponse.FullName.Equals(resultType)
+                        && (parametersRequest.Any(req => req.ParameterType.FullName == p.TypeRequest?.FullName) ||
+                        p.TypeRequest == null
+                        )).AsEnumerable();
         }
     }
 }

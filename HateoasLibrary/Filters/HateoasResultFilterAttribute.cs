@@ -16,13 +16,12 @@ namespace HateoasLibrary.Filters
         {
             _resultProvider = resultProvider ?? throw new ArgumentNullException(nameof(resultProvider));
         }
-
+     
         public override async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
         {
-
-            if (_resultProvider.HasAnyPolicy(context.Result, out ObjectResult result))
+            if (_resultProvider.HasAnyValidCondition(context.Result, out ObjectResult result))
             {
-                var finalResult = await _resultProvider.GetContentResultAsync(result).ConfigureAwait(false);
+                var finalResult = await _resultProvider.GetContentResultAsync(result, context.ActionDescriptor.Parameters).ConfigureAwait(false);
                 if (finalResult != null)
                 {
                     context.Result = finalResult;

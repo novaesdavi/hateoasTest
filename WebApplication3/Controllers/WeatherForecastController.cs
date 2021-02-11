@@ -23,8 +23,8 @@ namespace WebApplication3.Controllers
             _getWeatherUseCase = getWeatherUseCase;
         }
 
-        [HttpGet]
-        public IActionResult Get([FromQuery] WeatherForecastRequest request)
+        [HttpGet("{id_wheather}")]
+        public IActionResult Get([FromQuery] WeatherForecastRequest request, [FromRoute] WeatherForecastRoute route)
         {
 
            var response = _getWeatherUseCase.GetWeatherExecute(request);
