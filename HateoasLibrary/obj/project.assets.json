@@ -7692,11 +7692,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dnova\\source\\repos\\WebApplication3\\HateoasLibrary\\HateoasLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\HateoasLibrary\\HateoasLibrary.csproj",
       "projectName": "HateoasLibrary",
-      "projectPath": "C:\\Users\\dnova\\source\\repos\\WebApplication3\\HateoasLibrary\\HateoasLibrary.csproj",
+      "projectPath": "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\HateoasLibrary\\HateoasLibrary.csproj",
       "packagesPath": "C:\\Users\\dnova\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dnova\\source\\repos\\WebApplication3\\HateoasLibrary\\obj\\",
+      "outputPath": "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\HateoasLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

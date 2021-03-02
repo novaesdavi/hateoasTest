@@ -7,3 +7,12 @@ C:\Users\dnova\source\repos\WebApplication3\HateoasLibrary\obj\Debug\netcoreapp2
 C:\Users\dnova\source\repos\WebApplication3\HateoasLibrary\obj\Debug\netcoreapp2.1\HateoasLibrary.dll
 C:\Users\dnova\source\repos\WebApplication3\HateoasLibrary\obj\Debug\netcoreapp2.1\HateoasLibrary.pdb
 C:\Users\dnova\source\repos\WebApplication3\HateoasLibrary\obj\Debug\netcoreapp2.1\HateoasLibrary.csprojAssemblyReference.cache
+C:\Users\dnova\.gitRepositories\hateoasTest\HateoasLibrary\bin\Debug\netcoreapp2.1\HateoasLibrary.deps.json
+C:\Users\dnova\.gitRepositories\hateoasTest\HateoasLibrary\bin\Debug\netcoreapp2.1\HateoasLibrary.dll
+C:\Users\dnova\.gitRepositories\hateoasTest\HateoasLibrary\bin\Debug\netcoreapp2.1\HateoasLibrary.pdb
+C:\Users\dnova\.gitRepositories\hateoasTest\HateoasLibrary\obj\Debug\netcoreapp2.1\HateoasLibrary.csprojAssemblyReference.cache
+C:\Users\dnova\.gitRepositories\hateoasTest\HateoasLibrary\obj\Debug\netcoreapp2.1\HateoasLibrary.AssemblyInfoInputs.cache
+C:\Users\dnova\.gitRepositories\hateoasTest\HateoasLibrary\obj\Debug\netcoreapp2.1\HateoasLibrary.AssemblyInfo.cs
+C:\Users\dnova\.gitRepositories\hateoasTest\HateoasLibrary\obj\Debug\netcoreapp2.1\HateoasLibrary.csproj.CoreCompileInputs.cache
+C:\Users\dnova\.gitRepositories\hateoasTest\HateoasLibrary\obj\Debug\netcoreapp2.1\HateoasLibrary.dll
+C:\Users\dnova\.gitRepositories\hateoasTest\HateoasLibrary\obj\Debug\netcoreapp2.1\HateoasLibrary.pdb

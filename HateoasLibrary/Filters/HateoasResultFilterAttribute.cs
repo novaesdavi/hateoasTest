@@ -8,27 +8,27 @@ using System.Threading.Tasks;
 
 namespace HateoasLibrary.Filters
 {
-    public class HateoasResultFilterAttribute : ResultFilterAttribute
+    public class HateoasResultFilterAttribute : IAsyncActionFilter
     {
+
         private readonly IHateoasResultProvider _resultProvider;
 
         public HateoasResultFilterAttribute(IHateoasResultProvider resultProvider)
         {
             _resultProvider = resultProvider ?? throw new ArgumentNullException(nameof(resultProvider));
         }
-     
-        public override async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
+        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            if (_resultProvider.HasAnyValidCondition(context.Result, out ObjectResult result))
+            var resultAction = await next();
+
+            if (_resultProvider.HasAnyValidCondition(resultAction.Result, out ObjectResult result))
             {
-                var finalResult = await _resultProvider.GetContentResultAsync(result, context.ActionDescriptor.Parameters).ConfigureAwait(false);
+                var finalResult = await _resultProvider.GetContentResultAsync(result, context).ConfigureAwait(false);
                 if (finalResult != null)
                 {
-                    context.Result = finalResult;
+                    await finalResult.ExecuteResultAsync(context).ConfigureAwait(false);
                 }
             }
-
-            await base.OnResultExecutionAsync(context, next).ConfigureAwait(false);
         }
     }
 }

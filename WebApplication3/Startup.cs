@@ -32,11 +32,11 @@ namespace WebApplication3
 
             services.AddLink(builder =>
             {
-                //builder.AddPolicy<WeatherForecastResponse, WeatherForecastRequest>(model =>
-                //{
-                //    //model.AddExternalUri("chamada_principal", HttpMethod.Get.ToString(), (res,req) => $"/WeatherForecast/{res.Weathers.Count()}/teste/{req.Summary}", m => m.Response.Weathers.Count() >= 0, m => m.Response.Weathers.Count() >= 0);
-                //    model.AddExternalUri("chamada_principal_res_req", HttpMethod.Get.ToString(), (res, req) => $"/WeatherForecast/{res.Weathers.Count()}/teste/{req.Summary}");
-                //});
+                builder.AddPolicy<WeatherForecastResponse, WeatherForecastRequest>(model =>
+                {
+                    //model.AddExternalUri("chamada_principal", HttpMethod.Get.ToString(), (res,req) => $"/WeatherForecast/{res.Weathers.Count()}/teste/{req.Summary}", m => m.Response.Weathers.Count() >= 0, m => m.Response.Weathers.Count() >= 0);
+                    model.AddExternalUri("chamada_principal_res_req", HttpMethod.Get.ToString(), (res, req) => $"/WeatherForecast/{res.Weathers.Count()}/teste/{req.Summary}");
+                });
                 builder.AddPolicy<WeatherForecastResponse>(model =>
                 {
                     model.AddExternalUri("chamada_principal", HttpMethod.Get.ToString(), m => $"/teste", m => m.Response.Weathers.Count() >= 0);

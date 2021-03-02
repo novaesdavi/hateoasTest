@@ -2,6 +2,7 @@
 using HateoasLibrary.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,7 +79,7 @@ namespace HateoasLibrary.Providers
                 return false;
             }
 
-            
+
 
 
         }
@@ -95,9 +96,9 @@ namespace HateoasLibrary.Providers
             return true;
         }
 
-        public async Task<IActionResult> GetContentResultAsync(ObjectResult result, IList<ParameterDescriptor> parametersRequest)
+        public async Task<IActionResult> GetContentResultAsync(ObjectResult result, ActionExecutingContext context)
         {
-            var policies = GetFilteredPolicies(result, parametersRequest);
+            var policies = GetFilteredPolicies(result, context.ActionDescriptor.Parameters);
             if (!policies.Any())
             {
                 return null;
@@ -113,7 +114,19 @@ namespace HateoasLibrary.Providers
                 {
                     if (IsValidCondition(policy.Condition, result))
                     {
-                        var lambdaResult = GetLambdaResult(policy.Expression, item, policy.TypeRequest);
+                        object lambdaResult = null;
+                        if (policy.TypeRequest != null)
+                            foreach (var itemContext in context.ActionArguments.Select(s => s.Value))
+                            {
+                                if (itemContext.GetType() == policy.TypeRequest)
+                                {
+                                    lambdaResult = GetLambdaResult(policy.Expression, item, itemContext);
+                                }
+                            }
+
+                        if (lambdaResult == null)
+                            lambdaResult = GetLambdaResult(policy.Expression, item, null);
+
                         var link = await GetPolicyLinkAsync(policy, lambdaResult).ConfigureAwait(false);
                         links.Add(link);
                     }
@@ -184,7 +197,7 @@ namespace HateoasLibrary.Providers
             if (sourceRequest == null)
                 return Expression.Lambda(body, parameter).Compile().DynamicInvoke(sourcePayload);
             else
-                return Expression.Lambda(body, parameter).Compile().DynamicInvoke(sourcePayload, sourceRequest);
+                return Expression.Lambda(body, lambdaExpression.Parameters[0], lambdaExpression.Parameters[1]).Compile().DynamicInvoke(sourcePayload, sourceRequest);
         }
 
         private bool GetConditionResult(Func<Type, bool> condition, object sourcePayload)

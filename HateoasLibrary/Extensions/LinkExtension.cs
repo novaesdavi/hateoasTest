@@ -26,6 +26,7 @@ namespace HateoasLibrary.Extensions
             services.Configure<MvcOptions>(options =>
             {
                 options.Filters.Add<HateoasResultFilterAttribute>();
+                //options.Filters.Add<ControllerFilter>();
             });
 
             configure?.Invoke(linkBuilder);

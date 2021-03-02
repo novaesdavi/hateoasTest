@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LeE/1DqrbUV2LBXLpJVD9dnc9yykqV+/haq7MldSBA1RyMhyTmZ5Rv8MVAhIIhSOnxOQTp8OBfnjwizVmsdisA==",
+  "dgSpecHash": "p+s/gk46NnYF/98lAe4X6CIp5MXoRKDcFFn1INTb5+nugujBmh7hUrJpGQpp3dUbSt3aDlYLU5SsVeO2SC0LtQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dnova\\source\\repos\\WebApplication3\\WebApplication3\\WebApplication3.csproj",
+  "projectFilePath": "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\WebApplication3\\WebApplication3.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dnova\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\dnova\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

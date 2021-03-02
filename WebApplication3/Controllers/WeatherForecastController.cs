@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HateoasLibrary;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -24,10 +25,13 @@ namespace WebApplication3.Controllers
         }
 
         [HttpGet("{id_wheather}")]
-        public IActionResult Get([FromQuery] WeatherForecastRequest request, [FromRoute] WeatherForecastRoute route)
+        public IActionResult Get([FromQuery] WeatherForecastRequest request, [Hateoas][FromRoute] WeatherForecastRoute route)
         {
 
            var response = _getWeatherUseCase.GetWeatherExecute(request);
+
+            request.Summary = "testeHateoas";
+
             return Ok(response);
             
         }

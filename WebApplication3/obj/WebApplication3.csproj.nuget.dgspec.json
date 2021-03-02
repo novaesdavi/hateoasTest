@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dnova\\source\\repos\\WebApplication3\\WebApplication3\\WebApplication3.csproj": {}
+    "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\WebApplication3\\WebApplication3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dnova\\source\\repos\\WebApplication3\\HateoasLibrary\\HateoasLibrary.csproj": {
+    "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\HateoasLibrary\\HateoasLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dnova\\source\\repos\\WebApplication3\\HateoasLibrary\\HateoasLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\HateoasLibrary\\HateoasLibrary.csproj",
         "projectName": "HateoasLibrary",
-        "projectPath": "C:\\Users\\dnova\\source\\repos\\WebApplication3\\HateoasLibrary\\HateoasLibrary.csproj",
+        "projectPath": "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\HateoasLibrary\\HateoasLibrary.csproj",
         "packagesPath": "C:\\Users\\dnova\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dnova\\source\\repos\\WebApplication3\\HateoasLibrary\\obj\\",
+        "outputPath": "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\HateoasLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -97,14 +97,14 @@
         }
       }
     },
-    "C:\\Users\\dnova\\source\\repos\\WebApplication3\\WebApplication3\\WebApplication3.csproj": {
+    "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\WebApplication3\\WebApplication3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dnova\\source\\repos\\WebApplication3\\WebApplication3\\WebApplication3.csproj",
+        "projectUniqueName": "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\WebApplication3\\WebApplication3.csproj",
         "projectName": "WebApplication3",
-        "projectPath": "C:\\Users\\dnova\\source\\repos\\WebApplication3\\WebApplication3\\WebApplication3.csproj",
+        "projectPath": "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\WebApplication3\\WebApplication3.csproj",
         "packagesPath": "C:\\Users\\dnova\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dnova\\source\\repos\\WebApplication3\\WebApplication3\\obj\\",
+        "outputPath": "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\WebApplication3\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -125,8 +125,8 @@
           "netcoreapp3.0": {
             "targetAlias": "netcoreapp3.0",
             "projectReferences": {
-              "C:\\Users\\dnova\\source\\repos\\WebApplication3\\HateoasLibrary\\HateoasLibrary.csproj": {
-                "projectPath": "C:\\Users\\dnova\\source\\repos\\WebApplication3\\HateoasLibrary\\HateoasLibrary.csproj"
+              "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\HateoasLibrary\\HateoasLibrary.csproj": {
+                "projectPath": "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\HateoasLibrary\\HateoasLibrary.csproj"
               }
             }
           }

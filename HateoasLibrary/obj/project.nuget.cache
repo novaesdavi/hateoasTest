@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "92d5FlZLx/EyGJqVv3jvuBN3+3JRaYd+iIsKL5JQ7aQItv69hUGd+zOL0+iLJNMcZNWtgHtI/AlLLOhw2L/tSw==",
+  "dgSpecHash": "ABB9i/Hpf+gpRagjjyEdKt1GdvQZ5muxQJS+LVwF597mlnT90kt3/q9DIN++pp4TSxfD1/XeEg229D1qTWSiQA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\dnova\\source\\repos\\WebApplication3\\HateoasLibrary\\HateoasLibrary.csproj",
+  "projectFilePath": "C:\\Users\\dnova\\.gitRepositories\\hateoasTest\\HateoasLibrary\\HateoasLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dnova\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "C:\\Users\\dnova\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
